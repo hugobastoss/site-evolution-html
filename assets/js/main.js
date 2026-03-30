@@ -1,12 +1,57 @@
   // ── CONTATOS WHATSAPP ──────────────────────────────────────────
-  // Para alterar número ou mensagem, edite apenas aqui.
+  // URLs geradas dinamicamente a partir de CONFIG (assets/js/config.js)
+  function buildWaUrl(tipo) {
+    const tel = CONFIG.telefones[tipo] || CONFIG.telefones.servicos;
+    const msg = CONFIG.waMensagens[tipo] || '';
+    return msg
+      ? `https://wa.me/${tel.numero}?text=${encodeURIComponent(msg)}`
+      : `https://wa.me/${tel.numero}`;
+  }
   const WA = {
-    servicos: 'https://wa.me/5592991404018?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20servi%C3%A7o.',
-    produtos: 'https://wa.me/5592991404018?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20produtos%20dispon%C3%ADveis.',
-    loja:     'https://wa.me/5592991046810?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20produtos%20da%20loja.',
-    float:    'https://wa.me/5592991404018',
+    servicos: buildWaUrl('servicos'),
+    produtos:  buildWaUrl('produtos'),
+    loja:      buildWaUrl('loja'),
+    float:    `https://wa.me/${CONFIG.telefones.servicos.numero}`,
   };
   document.querySelectorAll('[data-wa]').forEach(a => { a.href = WA[a.dataset.wa] || '#'; });
+
+  // ── DADOS DE CONTATO (CONFIG → DOM) ───────────────────────────
+  // Telefones: <a data-config-tel="servicos">
+  document.querySelectorAll('[data-config-tel]').forEach(el => {
+    const tipo = el.dataset.configTel;
+    const tel  = CONFIG.telefones[tipo];
+    if (!tel) return;
+    el.href        = `tel:+${tel.numero}`;
+    el.textContent = tel.exibicao;
+  });
+
+  // Endereço: <div data-config="endereco">
+  const endDiv = document.querySelector('[data-config="endereco"]');
+  if (endDiv) {
+    const e = CONFIG.endereco;
+    endDiv.innerHTML = `${e.rua}<br>${e.complemento}<br>${e.bairro}, ${e.cidade} - ${e.estado}<br>CEP ${e.cep}`;
+  }
+
+  // Horários: <div data-config="horarios"> (pode aparecer mais de uma vez)
+  document.querySelectorAll('[data-config="horarios"]').forEach(el => {
+    el.innerHTML = CONFIG.horarios
+      .map(h => `<div>${h.dias}: ${h.abre} – ${h.fecha}</div>`)
+      .join('');
+  });
+
+  // Rodapé — endereço resumido
+  const footerAddr = document.querySelector('[data-config="footer-address"]');
+  if (footerAddr) {
+    const e = CONFIG.endereco;
+    footerAddr.textContent = `${e.rua} — ${e.bairro}, ${e.cidade} - ${e.estado} · CEP ${e.cep}`;
+  }
+
+  // Rodapé — copyright
+  const copyEl = document.querySelector('[data-config="copyright"]');
+  if (copyEl) {
+    const host = CONFIG.site.replace(/^https?:\/\//, '');
+    copyEl.textContent = `© ${CONFIG.ano} Evolution Refrigeração & Climatização — CNPJ ${CONFIG.cnpj} — ${host}`;
+  }
 
   // ── MENU MOBILE ────────────────────────────────────────────────
   // Links gerados automaticamente a partir do menu desktop.
