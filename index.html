@@ -502,18 +502,14 @@
           <div style="width:40px; height:40px; background:rgba(58,123,213,0.15); border:1px solid rgba(58,123,213,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px;">📍</div>
           <div>
             <div style="font-weight:600; font-size:15px; margin-bottom:2px;">Endereço</div>
-            <div style="color:var(--frost); font-size:14px; line-height:1.6;">R. Antônio Figueiredo, 127<br>Esquina com R. Virgílio Ferreira<br>Alvorada 2, Manaus - AM<br>CEP 69042-320</div>
+            <div data-config="endereco" style="color:var(--frost); font-size:14px; line-height:1.6;">R. Antônio Figueiredo, 127<br>Esquina com R. Virgílio Ferreira<br>Alvorada 2, Manaus - AM<br>CEP 69042-320</div>
           </div>
         </div>
         <div style="display:flex; align-items:flex-start; gap:14px;">
           <div style="width:40px; height:40px; background:rgba(58,123,213,0.15); border:1px solid rgba(58,123,213,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px;">🕐</div>
           <div>
             <div style="font-weight:600; font-size:15px; margin-bottom:2px;">Horários</div>
-            <div style="color:var(--frost); font-size:14px; line-height:1.9;">
-              Segunda: 08:00 – 19:00<br>
-              Terça a Sábado: 08:00 – 21:00<br>
-              Domingo: 08:00 – 13:00
-            </div>
+            <div data-config="horarios" style="color:var(--frost); font-size:14px; line-height:1.9;"></div>
           </div>
         </div>
       </div>
@@ -636,20 +632,16 @@
       <ul>
         <li style="margin-bottom:4px;">
           <span style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--ice); font-weight:600;">🔧 Serviços</span><br>
-          <a href="tel:+5592991404018" data-wa="servicos">(92) 99140-4018</a>
+          <a href="tel:+5592991404018" data-wa="servicos" data-config-tel="servicos">(92) 99140-4018</a>
         </li>
         <li style="margin-bottom:4px;">
           <span style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--ice); font-weight:600;">🏪 Loja de Peças</span><br>
-          <a href="tel:+5592991046810" data-wa="loja">(92) 99104-6810</a>
+          <a href="tel:+5592991046810" data-wa="loja" data-config-tel="loja">(92) 99104-6810</a>
         </li>
-        <li><a href="tel:+5592987400584">(92) 98740-0584</a></li>
+        <li><a href="tel:+5592987400584" data-config-tel="extra">(92) 98740-0584</a></li>
         <li style="margin-top:8px;">
           <span style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--ice); font-weight:600;">Horários</span>
-          <div style="margin-top:6px; font-size:13px; color:var(--frost); line-height:1.9;">
-            <div>Segunda: 08:00 – 19:00</div>
-            <div>Ter a Sáb: 08:00 – 21:00</div>
-            <div>Domingo: 08:00 – 13:00</div>
-          </div>
+          <div data-config="horarios" style="margin-top:6px; font-size:13px; color:var(--frost); line-height:1.9;"></div>
         </li>
       </ul>
     </div>
@@ -675,14 +667,15 @@
   </div>
 
   <div class="footer-bottom">
-    <p>© 2025 Evolution Refrigeração &amp; Climatização — CNPJ 43.860.042/0001-05 — www.evolutionrefriclima.com.br</p>
-    <p>Rua Juruti, 242 — Loja 02, Alvorada, Manaus - AM · CEP 69043-080</p>
+    <p data-config="copyright">© 2025 Evolution Refrigeração &amp; Climatização — CNPJ 43.860.042/0001-05 — www.evolutionrefriclima.com.br</p>
+    <p data-config="footer-address">R. Antônio Figueiredo, 127 — Alvorada 2, Manaus - AM · CEP 69042-320</p>
   </div>
 </footer>
 
 <!-- WHATSAPP FLOAT -->
 <a href="#" data-wa="float" target="_blank" class="whatsapp-float"><img src="assets/images/whatsapp.svg" alt="WhatsApp" style="width:32px;height:32px;vertical-align:middle;"></a>
 
+<script src="assets/js/config.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>
