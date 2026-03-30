@@ -10,7 +10,11 @@
       "Bash(python -c \"from PIL import Image; print\\(''Pillow OK''\\)\")",
       "Bash(python:*)",
       "Bash(python3 -c \"from PIL import Image; print\\(''ok''\\)\")",
-      "Bash(python3 -c \":*)"
+      "Bash(python3 -c \":*)",
+      "Bash(git -C \"c:/GitHub/site-evolution-html\" branch -a)",
+      "Bash(git -C \"c:/GitHub/site-evolution-html\" branch -d claude/unruffled-stonebraker)",
+      "Bash(git -C \"c:/GitHub/site-evolution-html\" push origin --delete claude/unruffled-stonebraker)",
+      "Bash(git -C \"c:/GitHub/site-evolution-html\" worktree remove --force \".claude/worktrees/unruffled-stonebraker\")"
     ]
   }
 }
