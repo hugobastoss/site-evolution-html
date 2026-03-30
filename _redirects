@@ -1,0 +1,6 @@
+# Redireciona www para sem www (HTTPS)
+https://www.evolutionrcar.com.br/* https://evolutionrcar.com.br/:splat 301!
+
+# Redireciona HTTP para HTTPS (caso o Netlify não faça automaticamente)
+http://evolutionrcar.com.br/* https://evolutionrcar.com.br/:splat 301!
+http://www.evolutionrcar.com.br/* https://evolutionrcar.com.br/:splat 301!

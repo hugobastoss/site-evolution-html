@@ -12,7 +12,7 @@ const CONFIG = {
 
   // ── EMPRESA ────────────────────────────────────────────────────────
   nome:  'Evolution Refri Clima',
-  site:  'https://www.evolutionrefriclima.com.br',
+  site:  'https://www.evolutionrcar.com.br',
   cnpj:  '43.860.042/0001-05',
   ano:   '2025',
 
