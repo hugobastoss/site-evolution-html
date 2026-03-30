@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram — Evolution Refri Clima</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .phone {
+    width: 390px;
+    background: #000;
+    border-radius: 40px;
+    overflow: hidden;
+    border: 2px solid #333;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+  }
+
+  /* STATUS BAR */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .status-bar .time { font-size: 15px; font-weight: 700; }
+  .status-icons { display: flex; gap: 6px; align-items: center; }
+
+  /* HEADER */
+  .ig-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px 12px;
+    border-bottom: .5px solid #262626;
+  }
+  .ig-username {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -.3px;
+  }
+  .ig-header-icons { display: flex; gap: 18px; }
+  .ig-header-icons svg { width: 24px; height: 24px; fill: #fff; }
+
+  /* PROFILE */
+  .profile-section {
+    padding: 16px 16px 12px;
+  }
+  .profile-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 14px;
+  }
+  .avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .avatar-ring {
+    width: 86px; height: 86px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    padding: 3px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .avatar-inner {
+    width: 78px; height: 78px;
+    border-radius: 50%;
+    background: #000;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    border: 3px solid #000;
+    overflow: hidden;
+  }
+  .avatar-inner svg {
+    width: 56px; height: 56px;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 0;
+    flex: 1;
+    justify-content: space-around;
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-item .num {
+    font-size: 17px;
+    font-weight: 700;
+    display: block;
+  }
+  .stat-item .lbl {
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  /* BIO */
+  .bio-section { margin-bottom: 14px; }
+  .bio-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .bio-category {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 6px;
+  }
+  .bio-text {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #f0f0f0;
+  }
+  .bio-text .highlight { color: #5b9bd5; }
+  .bio-link {
+    font-size: 13px;
+    color: #5b9bd5;
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* BOTÕES */
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .btn-seguir {
+    flex: 1;
+    background: #0095f6;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 0;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-msg {
+    flex: 1;
+    background: #262626;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 0;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-icon {
+    background: #262626;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  /* DESTAQUES */
+  .highlights {
+    padding: 4px 0 16px;
+    border-bottom: .5px solid #262626;
+  }
+  .highlights-scroll {
+    display: flex;
+    gap: 16px;
+    padding: 0 16px;
+    overflow-x: auto;
+  }
+  .highlights-scroll::-webkit-scrollbar { display: none; }
+  .highlight-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .highlight-ring {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    background: #111;
+  }
+  .highlight-ring.active {
+    border-color: transparent;
+    background: linear-gradient(#0d2a6e, #0d2a6e) padding-box,
+                linear-gradient(45deg, #1a3a8a, #3a7bd5, #a8d4f5, #1a3a8a) border-box;
+    border: 2px solid transparent;
+  }
+  .highlight-label {
+    font-size: 11px;
+    color: #e0e0e0;
+    text-align: center;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    border-bottom: .5px solid #262626;
+  }
+  .tab {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  .tab.active { border-bottom: 1.5px solid #fff; }
+  .tab svg { width: 22px; height: 22px; fill: #aaa; }
+  .tab.active svg { fill: #fff; }
+
+  /* GRID POSTS */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .post {
+    aspect-ratio: 1;
+    background: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .post .post-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,35,126,0.4), rgba(58,123,213,0.2));
+  }
+  .post-label {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    font-size: 9px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.4);
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  .post.reel::after {
+    content: '▶';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 11px;
+    color: white;
+  }
+
+  /* NOTA */
+  .note-box {
+    background: #0a1628;
+    border: 1px solid #1a3a6e;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 16px 16px 0;
+    font-size: 12px;
+    color: #a8d4f5;
+    line-height: 1.6;
+  }
+  .note-box strong { color: #fff; display: block; margin-bottom: 4px; font-size: 13px; }
+
+  /* BOTTOM NAV */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 20px;
+    border-top: .5px solid #262626;
+    margin-top: 16px;
+  }
+  .bottom-nav svg { width: 24px; height: 24px; fill: #aaa; }
+  .bottom-nav .active-nav svg { fill: #fff; }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="status-icons">
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="white"><rect x="0" y="3" width="3" height="9" rx="1"/><rect x="4.5" y="2" width="3" height="10" rx="1"/><rect x="9" y="0.5" width="3" height="11.5" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" opacity=".3"/></svg>
+      <svg width="16" height="12" viewBox="0 0 24 24" fill="white"><path d="M1.5 8.5C5.7 4.3 10.6 2 12 2s6.3 2.3 10.5 6.5M5 12c1.9-1.9 4.3-3 7-3s5.1 1.1 7 3M8.5 15.5c.9-.9 2.1-1.5 3.5-1.5s2.6.6 3.5 1.5M12 19h.01"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="white"><rect x="0" y="1" width="22" height="10" rx="3" stroke="white" stroke-width="1.5" fill="none"/><rect x="1.5" y="2.5" width="17" height="7" rx="2" fill="white"/><path d="M23 4.5v3a2 2 0 000-3z"/></svg>
+    </div>
+  </div>
+
+  <!-- IG Header -->
+  <div class="ig-header">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      <span class="ig-username">evolutionrc.ar</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white" opacity=".5"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="ig-header-icons">
+      <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18A9 9 0 0012 3zm0 2a7 7 0 110 14A7 7 0 0112 5zm0 3a4 4 0 100 8 4 4 0 000-8zm0 1.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm-7.3 9.7a7 7 0 0014.6 0 9 9 0 01-14.6 0z" opacity=".3"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14l4-4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+    </div>
+  </div>
+
+  <!-- Profile -->
+  <div class="profile-section">
+    <div class="profile-top">
+      <div class="avatar-wrap">
+        <div class="avatar-ring">
+          <div class="avatar-inner" style="background:#000; padding:2px;">
+            <img src="data:image/png;base64,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" alt="Logo Evolution" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+          </div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="num">48</span>
+          <span class="lbl">posts</span>
+        </div>
+        <div class="stat-item">
+          <span class="num">892</span>
+          <span class="lbl">seguidores</span>
+        </div>
+        <div class="stat-item">
+          <span class="num">215</span>
+          <span class="lbl">seguindo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="bio-section">
+      <div class="bio-name">Evolution Refrigeração & Climatização</div>
+      <div class="bio-category">Serviços locais</div>
+      <div class="bio-text">
+        🏪 Refrigeração &amp; Climatização<br>
+        📍 Manaus/Am - Alvorada 2<br>
+        🔧 Instalação · Manutenção · Reparos<br>
+        📦 +1.300 produtos em estoque<br>
+        📲 Conheça nossos Serviços e Produtos👇
+      </div>
+      <a class="bio-link">🔗 evolutionrc.ar</a>
+    </div>
+
+    <!-- Botões -->
+    <div class="action-buttons">
+      <button class="btn-seguir">Seguir</button>
+      <button class="btn-msg">Mensagem</button>
+      <button class="btn-icon">▾</button>
+    </div>
+  </div>
+
+  <!-- Destaques -->
+  <div class="highlights">
+    <div class="highlights-scroll">
+      <div class="highlight-item">
+        <div class="highlight-ring active">🔧</div>
+        <span class="highlight-label">Serviços</span>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-ring active">🏪</div>
+        <span class="highlight-label">Produtos</span>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-ring active">🔥</div>
+        <span class="highlight-label">Promoções</span>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-ring active">📍</div>
+        <span class="highlight-label">Localização</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab active">
+      <svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zm11 0h7v7h-7zM3 14h7v7H3zm11 0h7v7h-7z"/></svg>
+    </div>
+    <div class="tab">
+      <svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    </div>
+    <div class="tab">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+    </div>
+    <div class="tab">
+      <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+    </div>
+  </div>
+
+  <!-- Posts Grid -->
+  <div class="posts-grid">
+    <div class="post reel">
+      🌬️
+      <div class="post-overlay"></div>
+      <span class="post-label">Instalação</span>
+    </div>
+    <div class="post">
+      🔧
+      <div class="post-overlay"></div>
+      <span class="post-label">Manutenção</span>
+    </div>
+    <div class="post">
+      ❄️
+      <div class="post-overlay"></div>
+      <span class="post-label">Antes/Depois</span>
+    </div>
+    <div class="post">
+      📦
+      <div class="post-overlay"></div>
+      <span class="post-label">Estoque</span>
+    </div>
+    <div class="post reel">
+      🧪
+      <div class="post-overlay"></div>
+      <span class="post-label">Recarga Gás</span>
+    </div>
+    <div class="post">
+      ⭐
+      <div class="post-overlay"></div>
+      <span class="post-label">Depoimento</span>
+    </div>
+    <div class="post">
+      🏪
+      <div class="post-overlay"></div>
+      <span class="post-label">Loja</span>
+    </div>
+    <div class="post reel">
+      💡
+      <div class="post-overlay"></div>
+      <span class="post-label">Dica Técnica</span>
+    </div>
+    <div class="post">
+      🔥
+      <div class="post-overlay"></div>
+      <span class="post-label">Promoção</span>
+    </div>
+  </div>
+
+  <!-- Nota explicativa -->
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <div><svg viewBox="0 0 24 24" fill="white"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+    <div><svg viewBox="0 0 24 24" fill="#aaa"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+    <div style="background:#fff;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="black"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    </div>
+    <div><svg viewBox="0 0 24 24" fill="#aaa"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg></div>
+    <div><svg viewBox="0 0 24 24" fill="#aaa"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+  </div>
+
+</div>
+</body>
+</html>
