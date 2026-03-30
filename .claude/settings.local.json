@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -i 's|href=\"\"https://wa\\\\.me/5592991404018?text=Olá!%20Gostaria%20de%20solicitar%20um%20serviço\\\\.\"\"|href=\"\"#\"\" data-wa=\"\"servicos\"\"|g' \"C:/GitHub/site-evolution-html/.claude/worktrees/unruffled-stonebraker/evolution-site.html\")",
+      "Bash(sed -i 's|href=\"\"https://wa\\\\.me/5592991404018?text=Olá!%20Gostaria%20de%20consultar%20produtos%20disponíveis\\\\.\"\"|href=\"\"#\"\" data-wa=\"\"produtos\"\"|g' \"C:/GitHub/site-evolution-html/.claude/worktrees/unruffled-stonebraker/evolution-site.html\")",
+      "Bash(sed -i 's|href=\"\"https://wa\\\\.me/5592991046810?text=Olá!%20Gostaria%20de%20consultar%20produtos%20da%20loja\\\\.\"\"|href=\"\"#\"\" data-wa=\"\"loja\"\"|g' \"C:/GitHub/site-evolution-html/.claude/worktrees/unruffled-stonebraker/evolution-site.html\")",
+      "Bash(sed -i 's|href=\"\"https://wa\\\\.me/5592991404018\"\" target=\"\"_blank\"\" class=\"\"whatsapp-float\"\"|href=\"\"#\"\" data-wa=\"\"float\"\" target=\"\"_blank\"\" class=\"\"whatsapp-float\"\"|g' \"C:/GitHub/site-evolution-html/.clone/worktrees/unruffled-stonebraker/evolution-site.html\")",
+      "Bash(sed -i 's|href=\"\"https://wa\\\\.me/5592991404018\"\" target=\"\"_blank\"\" class=\"\"whatsapp-float\"\"|href=\"\"#\"\" data-wa=\"\"float\"\" target=\"\"_blank\"\" class=\"\"whatsapp-float\"\"|g' \"C:/GitHub/site-evolution-html/.claude/worktrees/unruffled-stonebraker/evolution-site.html\")",
+      "Bash(python -:*)"
+    ]
+  }
+}
