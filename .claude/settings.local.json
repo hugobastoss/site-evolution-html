@@ -8,7 +8,9 @@
       "Bash(sed -i 's|href=\"\"https://wa\\\\.me/5592991404018\"\" target=\"\"_blank\"\" class=\"\"whatsapp-float\"\"|href=\"\"#\"\" data-wa=\"\"float\"\" target=\"\"_blank\"\" class=\"\"whatsapp-float\"\"|g' \"C:/GitHub/site-evolution-html/.claude/worktrees/unruffled-stonebraker/evolution-site.html\")",
       "Bash(python -:*)",
       "Bash(python -c \"from PIL import Image; print\\(''Pillow OK''\\)\")",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(python3 -c \"from PIL import Image; print\\(''ok''\\)\")",
+      "Bash(python3 -c \":*)"
     ]
   }
 }

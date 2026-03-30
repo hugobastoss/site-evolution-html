@@ -13,13 +13,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Evolution Refri Clima">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:image" content="https://www.evolutionrefriclima.com.br/og-image.jpg">
+<meta property="og:image" content="https://www.evolutionrefriclima.com.br/assets/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Evolution Refri Clima | Refrigeração e Climatização em Manaus">
 <meta name="twitter:description" content="Loja com +1.300 produtos e serviços técnicos especializados. Instalação, manutenção e recarga de gás em Manaus.">
-<meta name="twitter:image" content="https://www.evolutionrefriclima.com.br/og-image.jpg">
+<meta name="twitter:image" content="https://www.evolutionrefriclima.com.br/assets/images/og-image.jpg">
 <link rel="canonical" href="https://www.evolutionrefriclima.com.br">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
   "description": "Especialistas em refrigeração e climatização em Manaus. Loja com mais de 1.300 produtos e serviços técnicos especializados.",
   "url": "https://www.evolutionrefriclima.com.br",
   "logo": "https://www.evolutionrefriclima.com.br/logo.png",
-  "image": "https://www.evolutionrefriclima.com.br/og-image.jpg",
+  "image": "https://www.evolutionrefriclima.com.br/assets/images/og-image.jpg",
   "telephone": ["+5592991404018", "+5592991046810"],
   "address": {
     "@type": "PostalAddress",
@@ -127,6 +127,32 @@
     <div class="hero-actions">
       <a href="#services" class="btn-primary">Ver Serviços →</a>
       <a href="#products" class="btn-outline">Explorar Loja</a>
+    </div>
+  </div>
+
+  <!-- SLIDER -->
+  <div class="hero-slider" aria-label="Fotos da loja e serviços">
+    <div class="slider-track">
+      <div class="slide">
+        <img src="assets/images/hero-1.webp" alt="Loja Evolution Refri Clima" width="900" height="560">
+      </div>
+      <div class="slide">
+        <img src="assets/images/hero-2.webp" alt="Serviços de refrigeração" width="900" height="560">
+      </div>
+      <div class="slide">
+        <img src="assets/images/hero-3.webp" alt="Estoque de produtos" width="900" height="560">
+      </div>
+      <div class="slide">
+        <img src="assets/images/hero-4.webp" alt="Equipe técnica certificada" width="900" height="560">
+      </div>
+    </div>
+    <button class="slider-btn slider-prev" aria-label="Slide anterior">&#8249;</button>
+    <button class="slider-btn slider-next" aria-label="Próximo slide">&#8250;</button>
+    <div class="slider-dots" role="tablist">
+      <button class="dot active" aria-label="Slide 1"></button>
+      <button class="dot" aria-label="Slide 2"></button>
+      <button class="dot" aria-label="Slide 3"></button>
+      <button class="dot" aria-label="Slide 4"></button>
     </div>
   </div>
 
@@ -290,7 +316,10 @@
 
     <!-- COMPRESSORES -->
     <div class="product-card" data-cat="compressores">
-      <div class="product-img">🌀<div class="product-badge">+Modelos</div></div>
+      <div class="product-img product-img--gray" style="display:flex;align-items:center;justify-content:center;font-size:52px;">
+        🌀
+        <div class="product-badge">+Modelos</div>
+      </div>
       <div class="product-info">
         <h4>Compressor Hermético</h4>
         <p>Para refrigeração doméstica e comercial leve. Diversas capacidades.</p>
@@ -299,7 +328,10 @@
     </div>
 
     <div class="product-card" data-cat="compressores">
-      <div class="product-img">⚙️</div>
+      <div class="product-img product-img--gray" style="display:flex;align-items:center;justify-content:center;font-size:52px;">
+        ⚙️
+        <div class="product-badge">+Modelos</div>
+      </div>
       <div class="product-info">
         <h4>Compressor Rotativo</h4>
         <p>Para ar-condicionado split e sistemas de climatização.</p>
@@ -308,7 +340,10 @@
     </div>
 
     <div class="product-card" data-cat="compressores">
-      <div class="product-img">🔩</div>
+      <div class="product-img product-img--gray" style="display:flex;align-items:center;justify-content:center;font-size:52px;">
+        🔩
+        <div class="product-badge">+Modelos</div>
+      </div>
       <div class="product-info">
         <h4>Compressor Scroll</h4>
         <p>Para sistemas de refrigeração comercial de médio e grande porte.</p>
@@ -513,7 +548,7 @@
           </div>
         </div>
       </div>
-      <a href="#" data-wa="servicos" target="_blank" class="btn-primary" style="display:inline-flex;">
+      <a href="https://www.google.com/maps/search/?api=1&query=R.+Antônio+Figueiredo,+127,+Alvorada+2,+Manaus+-+AM" target="_blank" class="btn-primary" style="display:inline-flex;">
         📍 Ver no Google Maps →
       </a>
     </div>
@@ -587,13 +622,13 @@
       <div style="margin-top:20px;">
         <h5 style="font-family:'Barlow Condensed'; font-size:13px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--ice); margin-bottom:14px;">Redes Sociais</h5>
         <div style="display:flex; gap:10px;">
-          <a href="https://www.instagram.com/_evolution_refrigeracao_/" target="_blank" class="social-btn" title="Instagram">
+          <a href="#" data-social="instagram" target="_blank" class="social-btn" title="Instagram">
             <img src="assets/images/instagram.svg" loading="lazy" alt="Instagram" style="width:22px;height:22px;">
           </a>
-          <a href="#" target="_blank" class="social-btn" title="TikTok" style="background:rgba(0,0,0,0.4);">
+          <a href="#" data-social="tiktok" target="_blank" class="social-btn" title="TikTok" style="background:rgba(0,0,0,0.4);">
             <img src="assets/images/tiktok.svg" loading="lazy" alt="TikTok" style="width:22px;height:22px;">
           </a>
-          <a href="#" target="_blank" class="social-btn" title="Facebook" style="background:rgba(24,119,242,0.3);">
+          <a href="#" data-social="facebook" target="_blank" class="social-btn" title="Facebook" style="background:rgba(24,119,242,0.3);">
             <img src="assets/images/facebook.svg" loading="lazy" alt="Facebook" style="width:22px;height:22px;">
           </a>
         </div>
@@ -604,12 +639,12 @@
     <div class="footer-col">
       <h5>Serviços</h5>
       <ul>
-        <li><a href="#">Instalação</a></li>
-        <li><a href="#">Manutenção Preventiva</a></li>
-        <li><a href="#">Recarga de Gás</a></li>
-        <li><a href="#">Limpeza de Ar-condicionado</a></li>
-        <li><a href="#">Câmaras Frias</a></li>
-        <li><a href="#">Refrigeração Comercial</a></li>
+        <li><a href="#services">Instalação</a></li>
+        <li><a href="#services">Manutenção Preventiva</a></li>
+        <li><a href="#services">Recarga de Gás</a></li>
+        <li><a href="#services">Limpeza de Ar-condicionado</a></li>
+        <li><a href="#services">Câmaras Frias</a></li>
+        <li><a href="#services">Refrigeração Comercial</a></li>
       </ul>
     </div>
 
@@ -617,12 +652,12 @@
     <div class="footer-col">
       <h5>Loja</h5>
       <ul>
-        <li><a href="#">Compressores</a></li>
-        <li><a href="#">Gases Refrigerantes</a></li>
-        <li><a href="#">Ar-condicionado</a></li>
-        <li><a href="#">Capacitores</a></li>
-        <li><a href="#">Ferramentas</a></li>
-        <li><a href="#">Câmara Fria</a></li>
+        <li><a href="https://evolutionl.smartpos.app/" target="_blank">Compressores</a></li>
+        <li><a href="https://evolutionl.smartpos.app/" target="_blank">Gases Refrigerantes</a></li>
+        <li><a href="https://evolutionl.smartpos.app/" target="_blank">Ar-condicionado</a></li>
+        <li><a href="https://evolutionl.smartpos.app/" target="_blank">Capacitores</a></li>
+        <li><a href="https://evolutionl.smartpos.app/" target="_blank">Ferramentas</a></li>
+        <li><a href="https://evolutionl.smartpos.app/" target="_blank">Câmara Fria</a></li>
       </ul>
     </div>
 

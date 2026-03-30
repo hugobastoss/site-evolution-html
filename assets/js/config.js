@@ -52,7 +52,7 @@ const CONFIG = {
   // ── REDES SOCIAIS ──────────────────────────────────────────────────
   // Deixe vazio ('') para ocultar o ícone
   redes: {
-    instagram: 'https://www.instagram.com/evolutionrefriclima',
+    instagram: 'https://www.instagram.com/_evolution_refrigeracao_/',
     facebook:  '',
     tiktok:    '',
   },

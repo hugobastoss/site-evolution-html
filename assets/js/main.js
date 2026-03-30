@@ -53,6 +53,18 @@
     copyEl.textContent = `© ${CONFIG.ano} Evolution Refrigeração & Climatização — CNPJ ${CONFIG.cnpj} — ${host}`;
   }
 
+  // ── REDES SOCIAIS ──────────────────────────────────────────────
+  // Aplica URLs de CONFIG.redes e oculta botões sem link configurado
+  document.querySelectorAll('[data-social]').forEach(a => {
+    const rede = a.dataset.social;
+    const url  = CONFIG.redes[rede];
+    if (url) {
+      a.href = url;
+    } else {
+      a.style.display = 'none';
+    }
+  });
+
   // ── MENU MOBILE ────────────────────────────────────────────────
   // Links gerados automaticamente a partir do menu desktop.
   function toggleMenu() {
@@ -95,6 +107,50 @@
       document.getElementById('productsEmpty').style.display = visible === 0 ? '' : 'none';
     });
   });
+
+  // ── HERO SLIDER ────────────────────────────────────────────────
+  (function initSlider() {
+    const track  = document.querySelector('.slider-track');
+    if (!track) return;
+
+    const slides = track.querySelectorAll('.slide');
+    const dots   = document.querySelectorAll('.slider-dots .dot');
+    const total  = slides.length;
+    let current  = 0;
+    let timer;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    function startAutoplay() {
+      clearInterval(timer);
+      timer = setInterval(next, 4500);
+    }
+
+    document.querySelector('.slider-next')?.addEventListener('click', () => { next(); startAutoplay(); });
+    document.querySelector('.slider-prev')?.addEventListener('click', () => { prev(); startAutoplay(); });
+    dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); startAutoplay(); }));
+
+    // Swipe touch
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); startAutoplay(); }
+    });
+
+    // Pausa ao hover
+    track.closest('.hero-slider').addEventListener('mouseenter', () => clearInterval(timer));
+    track.closest('.hero-slider').addEventListener('mouseleave', startAutoplay);
+
+    startAutoplay();
+  })();
 
   // ── SCROLL SUAVE ───────────────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
