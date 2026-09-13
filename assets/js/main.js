@@ -92,21 +92,56 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
-  // ── FILTRO DE CATEGORIAS ───────────────────────────────────────
-  document.querySelectorAll('.cat-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      const cat = pill.getAttribute('data-cat');
-      let visible = 0;
-      document.querySelectorAll('.product-card').forEach(card => {
-        const show = cat === 'todos' || card.getAttribute('data-cat') === cat;
-        card.style.display = show ? '' : 'none';
-        if (show) visible++;
+  // ── FILTRO DE CATEGORIAS + GRADE COLAPSADA (2 linhas) ───────────
+  (function initProductsGrid() {
+    const ROWS_COLLAPSED = 2;
+    const cards = document.querySelectorAll('.product-card');
+    const productsEmpty = document.getElementById('productsEmpty');
+    const moreBtn = document.getElementById('productsMoreBtn');
+    if (!cards.length) return;
+
+    let expanded = false;
+
+    function getCols() {
+      return window.matchMedia('(min-width: 1025px)').matches ? 4 : 2;
+    }
+
+    function applyVisibility() {
+      const activeCat = document.querySelector('.cat-pill.active')?.getAttribute('data-cat') || 'todos';
+      const limit = expanded ? Infinity : getCols() * ROWS_COLLAPSED;
+      let matchCount = 0;
+      cards.forEach(card => {
+        const isMatch = activeCat === 'todos' || card.getAttribute('data-cat') === activeCat;
+        if (!isMatch) { card.style.display = 'none'; return; }
+        matchCount++;
+        card.style.display = matchCount <= limit ? '' : 'none';
       });
-      document.getElementById('productsEmpty').style.display = visible === 0 ? '' : 'none';
+      if (productsEmpty) productsEmpty.style.display = matchCount === 0 ? '' : 'none';
+      if (moreBtn) moreBtn.style.display = (!expanded && matchCount > limit) ? '' : 'none';
+    }
+
+    document.querySelectorAll('.cat-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        expanded = false;
+        applyVisibility();
+      });
     });
-  });
+
+    moreBtn?.addEventListener('click', () => {
+      expanded = true;
+      applyVisibility();
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(applyVisibility, 200);
+    });
+
+    applyVisibility();
+  })();
 
   // ── HERO SLIDER ────────────────────────────────────────────────
   (function initSlider() {
