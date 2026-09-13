@@ -216,6 +216,39 @@
     startAutoplay();
   })();
 
+  // ── CARROSSEL DE AVALIAÇÕES (rolagem automática em uma linha) ──
+  (function initReviewsCarousel() {
+    const carousel = document.querySelector('.reviews-carousel');
+    const track = document.getElementById('reviewsTrack');
+    const pauseBtn = document.getElementById('reviewsPause');
+    if (!carousel || !track) return;
+
+    const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (reduceMotionQuery.matches) {
+      // Sem animação forçada: vira uma faixa com rolagem manual (arraste/swipe)
+      carousel.classList.add('no-scroll');
+      return;
+    }
+
+    // Duplica os cards uma vez para permitir o loop contínuo (a track roda até -50%)
+    Array.from(track.children).forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+    track.classList.add('is-looping');
+
+    let paused = false;
+    pauseBtn?.addEventListener('click', () => {
+      paused = !paused;
+      carousel.classList.toggle('paused', paused);
+      pauseBtn.querySelector('.material-symbols-outlined').textContent = paused ? 'play_arrow' : 'pause';
+      pauseBtn.setAttribute('aria-label', paused ? 'Retomar rolagem automática' : 'Pausar rolagem automática');
+      pauseBtn.setAttribute('aria-pressed', String(paused));
+    });
+  })();
+
   // ── SCROLL SUAVE ───────────────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {

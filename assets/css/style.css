@@ -634,13 +634,56 @@
   }
   .reviews-header .section-sub { margin: 0 auto; }
   .google-wordmark { font-weight: 600; }
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+
+  /* Carrossel automático em uma linha: a track é duplicada via JS e roda em loop; */
+  /* sem JS ou com "menos movimento" pedido pelo usuário, vira uma faixa com rolagem manual. */
+  .reviews-carousel {
+    position: relative;
+    overflow: hidden;
     max-width: 1200px;
     margin: 0 auto;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
   }
+  .reviews-carousel.no-scroll {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .reviews-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+  }
+  /* A animação só liga depois que o JS duplicar os cards (evita salto se o JS falhar) */
+  .reviews-track.is-looping {
+    animation: reviews-scroll 42s linear infinite;
+  }
+  .reviews-carousel:hover .reviews-track,
+  .reviews-carousel:focus-within .reviews-track,
+  .reviews-carousel.paused .reviews-track {
+    animation-play-state: paused;
+  }
+  .reviews-carousel.no-scroll .reviews-track {
+    animation: none;
+  }
+  @keyframes reviews-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .reviews-pause {
+    position: absolute; top: 50%; right: 12px; transform: translateY(-50%);
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(10,22,40,0.75);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border: 1px solid rgba(58,123,213,0.3);
+    color: var(--white); cursor: pointer; transition: all .2s;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 3;
+  }
+  .reviews-pause .material-symbols-outlined { font-size: 18px; }
+  .reviews-pause:hover, .reviews-pause:focus-visible { background: var(--light); border-color: var(--light); }
+  .reviews-carousel.no-scroll .reviews-pause { display: none; }
   .review-card {
     background: rgba(10,22,40,0.6);
     border: 1px solid rgba(58,123,213,0.15);
@@ -649,7 +692,9 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    transition: all .3s;
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+    width: 340px;
+    flex-shrink: 0;
   }
   .review-card:hover {
     border-color: rgba(58,123,213,0.4);
@@ -924,11 +969,7 @@
 
     /* AVALIAÇÕES MOBILE */
     .reviews { padding: 60px 5%; }
-    .reviews-grid {
-      grid-template-columns: 1fr !important;
-      gap: 14px;
-    }
-    .review-card { padding: 20px; }
+    .review-card { width: 260px; padding: 20px; }
 
     /* CTA BANNER MOBILE */
     .cta-banner {
@@ -985,7 +1026,6 @@
     .hero h1 { font-size: 36px; }
     .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .products-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    .reviews-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .diff-grid { grid-template-columns: 1fr !important; gap: 40px; }
     .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 40px; }
     .cta-banner { flex-direction: column; text-align: center; padding: 48px 40px; }
