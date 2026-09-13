@@ -413,10 +413,7 @@
     background: var(--navy);
   }
   .products-header {
-    text-align:center; margin-bottom:70px;
-  }
-  .products-header .section-sub {
-    margin:0 auto;
+    text-align:left; margin-bottom:70px;
   }
   .categories-strip {
     display:flex; gap:12px; flex-wrap:wrap;
