@@ -115,9 +115,12 @@
 
     const slides = track.querySelectorAll('.slide');
     const dots   = document.querySelectorAll('.slider-dots .dot');
+    const pauseBtn = document.getElementById('sliderPause');
+    const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const total  = slides.length;
     let current  = 0;
     let timer;
+    let userPaused = reduceMotionQuery.matches;
 
     function goTo(index) {
       current = (index + total) % total;
@@ -128,14 +131,30 @@
     function next() { goTo(current + 1); }
     function prev() { goTo(current - 1); }
 
+    function setPauseUI(paused) {
+      if (!pauseBtn) return;
+      pauseBtn.querySelector('.material-symbols-outlined').textContent = paused ? 'play_arrow' : 'pause';
+      pauseBtn.setAttribute('aria-label', paused ? 'Retomar apresentação automática' : 'Pausar apresentação automática');
+      pauseBtn.setAttribute('aria-pressed', String(paused));
+    }
+
     function startAutoplay() {
       clearInterval(timer);
+      if (userPaused || reduceMotionQuery.matches) return;
       timer = setInterval(next, 4500);
     }
+
+    setPauseUI(userPaused);
 
     document.querySelector('.slider-next')?.addEventListener('click', () => { next(); startAutoplay(); });
     document.querySelector('.slider-prev')?.addEventListener('click', () => { prev(); startAutoplay(); });
     dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); startAutoplay(); }));
+
+    pauseBtn?.addEventListener('click', () => {
+      userPaused = !userPaused;
+      setPauseUI(userPaused);
+      if (userPaused) { clearInterval(timer); } else { startAutoplay(); }
+    });
 
     // Swipe touch
     let touchStartX = 0;
@@ -145,9 +164,12 @@
       if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); startAutoplay(); }
     });
 
-    // Pausa ao hover
-    track.closest('.hero-slider').addEventListener('mouseenter', () => clearInterval(timer));
-    track.closest('.hero-slider').addEventListener('mouseleave', startAutoplay);
+    // Pausa ao passar o mouse ou ao navegar com teclado (foco) pelos controles
+    const heroSlider = track.closest('.hero-slider');
+    heroSlider.addEventListener('mouseenter', () => clearInterval(timer));
+    heroSlider.addEventListener('mouseleave', startAutoplay);
+    heroSlider.addEventListener('focusin', () => clearInterval(timer));
+    heroSlider.addEventListener('focusout', () => startAutoplay());
 
     startAutoplay();
   })();

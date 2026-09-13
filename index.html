@@ -129,6 +129,7 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
+  <span class="hero-mark material-symbols-outlined" aria-hidden="true">ac_unit</span>
   <div class="hero-content">
     <div class="hero-tag">Refrigeração & Climatização — Manaus, AM</div>
     <h1>Soluções que<br>mantêm tudo<br><em>no frio certo.</em></h1>
@@ -136,6 +137,7 @@
     <div class="hero-actions">
       <a href="#services" class="btn-primary">Ver Serviços →</a>
       <a href="#products" class="btn-outline">Explorar Loja</a>
+      <a href="tel:+5592991404018" class="hero-call"><span class="material-symbols-outlined" aria-hidden="true">call</span>(92) 99140-4018</a>
     </div>
   </div>
 
@@ -155,14 +157,17 @@
         <img src="assets/images/hero-4.webp" alt="Equipe técnica certificada" width="900" height="560">
       </div>
     </div>
-    <button class="slider-btn slider-prev" aria-label="Slide anterior">&#8249;</button>
-    <button class="slider-btn slider-next" aria-label="Próximo slide">&#8250;</button>
+    <button type="button" class="slider-btn slider-prev" aria-label="Slide anterior">&#8249;</button>
+    <button type="button" class="slider-btn slider-next" aria-label="Próximo slide">&#8250;</button>
     <div class="slider-dots" role="tablist">
-      <button class="dot active" aria-label="Slide 1"></button>
-      <button class="dot" aria-label="Slide 2"></button>
-      <button class="dot" aria-label="Slide 3"></button>
-      <button class="dot" aria-label="Slide 4"></button>
+      <button type="button" class="dot active" aria-label="Slide 1"></button>
+      <button type="button" class="dot" aria-label="Slide 2"></button>
+      <button type="button" class="dot" aria-label="Slide 3"></button>
+      <button type="button" class="dot" aria-label="Slide 4"></button>
     </div>
+    <button type="button" class="slider-pause" id="sliderPause" aria-label="Pausar apresentação automática" aria-pressed="false">
+      <span class="material-symbols-outlined" aria-hidden="true">pause</span>
+    </button>
   </div>
 
 </section>

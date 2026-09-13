@@ -28,6 +28,9 @@
     --frost:   #dceeff;
     --white:   #ffffff;
     --glow:    rgba(58,123,213,0.35);
+    --amber:      #f5a623;
+    --amber-deep: #ff8a00;
+    --amber-glow: rgba(245,166,35,0.45);
   }
 
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -151,6 +154,21 @@
     0%,100% { opacity:.4; transform:translate(-50%,-50%) scale(1); }
     50%      { opacity:1;  transform:translate(-50%,-50%) scale(1.04); }
   }
+  /* Oversized watermark reinforcing "no frio certo" — purely decorative, hidden from AT */
+  .hero-mark {
+    position:absolute; top:50%; left:58%;
+    transform:translate(-50%,-50%);
+    font-size:min(46vw, 620px);
+    color: var(--light);
+    opacity:.07;
+    pointer-events:none;
+    -webkit-user-select:none; user-select:none;
+    animation: markSpin 60s linear infinite;
+  }
+  @keyframes markSpin {
+    from { transform:translate(-50%,-50%) rotate(0deg); }
+    to   { transform:translate(-50%,-50%) rotate(360deg); }
+  }
 
   .hero-content { position:relative; z-index:2; max-width:640px; }
   .hero-tag {
@@ -211,6 +229,24 @@
     transform:translateY(-2px);
     box-shadow: 0 12px 40px rgba(58,123,213,0.6);
   }
+  /* Hero CTA gets a warm accent so it pops against the all-blue hero, instead of blending in */
+  .hero-actions .btn-primary {
+    background: linear-gradient(135deg, var(--amber-deep), var(--amber));
+    color: var(--dark);
+    box-shadow: 0 8px 32px var(--amber-glow);
+  }
+  .hero-actions .btn-primary:hover {
+    box-shadow: 0 12px 40px rgba(245,166,35,0.65);
+  }
+  .hero-call {
+    display:inline-flex; align-items:center; gap:8px;
+    color: var(--frost); text-decoration:none;
+    font-size:14px; font-weight:500;
+    padding: 14px 4px;
+    transition: color .2s;
+  }
+  .hero-call .material-symbols-outlined { font-size:20px; color:var(--ice); }
+  .hero-call:hover { color: var(--white); }
   .btn-outline {
     border: 1px solid rgba(168,212,245,0.4);
     color: var(--frost);
@@ -224,31 +260,6 @@
     background: rgba(168,212,245,0.08);
     border-color: var(--ice);
     color: var(--white);
-  }
-
-  .hero-stats {
-    position:absolute; right:5%; bottom:15%;
-    display:flex; flex-direction:column; gap:20px;
-    z-index:2;
-    animation: fadeLeft .8s .6s ease both;
-  }
-  .stat-card {
-    background: rgba(13,34,68,0.7);
-    border: 1px solid rgba(58,123,213,0.2);
-    backdrop-filter:blur(12px);
-    padding:16px 24px; border-radius:10px;
-    text-align:center;
-    min-width:130px;
-  }
-  .stat-num {
-    font-family:'Bebas Neue', sans-serif;
-    font-size:36px; letter-spacing:2px;
-    color: var(--ice);
-    display:block;
-  }
-  .stat-label {
-    font-size:10px; letter-spacing:3px; text-transform:uppercase;
-    color: var(--frost); opacity:.7;
   }
 
   @keyframes fadeUp {
@@ -285,7 +296,8 @@
   }
   .slider-btn {
     position: absolute; top: 50%; transform: translateY(-50%);
-    background: rgba(10,22,40,0.6); backdrop-filter: blur(8px);
+    background: rgba(10,22,40,0.6);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border: 1px solid rgba(58,123,213,0.3);
     color: var(--white); font-size: 28px; line-height: 1;
     width: 44px; height: 44px; border-radius: 50%;
@@ -293,19 +305,52 @@
     display: flex; align-items: center; justify-content: center;
     z-index: 3;
   }
-  .slider-btn:hover { background: var(--light); border-color: var(--light); }
+  .slider-btn:hover, .slider-btn:focus-visible { background: var(--light); border-color: var(--light); }
   .slider-prev { left: 14px; }
   .slider-next { right: 14px; }
   .slider-dots {
-    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
-    display: flex; gap: 8px; z-index: 3;
+    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+    display: flex; z-index: 3;
   }
+  /* Visual dot is 8px, but the button hit area is enlarged to 28px so it stays tappable on mobile */
   .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(255,255,255,0.35); border: none; cursor: pointer;
-    transition: all .3s; padding: 0;
+    width: 28px; height: 28px; padding: 0; margin: 0;
+    background: transparent; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
   }
-  .dot.active { background: var(--white); width: 22px; border-radius: 4px; }
+  .dot::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    transition: all .3s;
+  }
+  .dot.active::before { background: var(--white); width: 22px; border-radius: 4px; }
+  .dot:focus-visible::before { outline: 2px solid var(--ice); outline-offset: 2px; }
+
+  .slider-pause {
+    position: absolute; bottom: 12px; right: 14px; z-index: 3;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(10,22,40,0.6);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border: 1px solid rgba(58,123,213,0.3);
+    color: var(--white); cursor: pointer; transition: all .2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slider-pause .material-symbols-outlined { font-size: 18px; }
+  .slider-pause:hover, .slider-pause:focus-visible { background: var(--light); border-color: var(--light); }
+
+  /* Users who ask for less motion don't get decorative pulsing, entrance slides, or the carousel snap */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg::before, .hero-bg::after, .hero-tag::before {
+      animation: none;
+    }
+    .hero-mark { animation: none; transform:translate(-50%,-50%); }
+    .hero-tag, .hero h1, .hero p, .hero-actions, .hero-slider {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .slider-track { transition: none; }
+  }
 
   /* ── SECTION BASE ── */
   section { position:relative; z-index:1; }
@@ -753,7 +798,7 @@
       margin-bottom: 12px;
     }
     .hero p {
-      font-size: 12px;
+      font-size: 14px;
       line-height: 1.6;
       margin-bottom: 22px;
       max-width: 100%;
@@ -769,6 +814,11 @@
       padding: 15px 24px;
       font-size: 13px;
     }
+    .hero-call {
+      width: 100%;
+      justify-content: center;
+      padding: 4px;
+    }
 
     /* Slider mobile — aparece abaixo do conteúdo */
     .hero-slider {
@@ -778,30 +828,6 @@
       margin-top: 32px;
     }
     .slide img { height: 240px; }
-
-    /* Stats mobile — grade 2x2 abaixo do conteúdo */
-    .hero-stats {
-      position: relative;
-      right: auto; bottom: auto;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: stretch;
-      gap: 10px;
-      margin-top: 32px;
-      width: 100%;
-    }
-    .stat-card {
-      flex: 1 1 calc(50% - 5px);
-      min-width: 0;
-      padding: 14px 12px;
-      text-align: center;
-    }
-    /* Card de horários ocupa linha inteira no mobile */
-    .stat-card:last-child {
-      flex: 1 1 100%;
-    }
-    .stat-num { font-size: 26px; }
-    .stat-label { font-size: 9px; }
 
     /* MARCAS MOBILE */
     .brands-strip {
@@ -906,7 +932,6 @@
   @media (min-width: 769px) and (max-width: 1024px) {
     .nav-menu-btn { display: none; }
     .hero h1 { font-size: 36px; }
-    .hero-stats { right: 3%; }
     .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .products-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .diff-grid { grid-template-columns: 1fr !important; gap: 40px; }
