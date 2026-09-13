@@ -349,6 +349,7 @@
   .services {
     padding: 120px 5%;
     background: linear-gradient(180deg, var(--dark) 0%, var(--navy) 100%);
+    border-top: 1px solid rgba(58,123,213,0.12);
   }
   .services-header {
     display:grid; grid-template-columns:1fr 1fr;
@@ -411,6 +412,7 @@
   .products {
     padding: 120px 5%;
     background: var(--navy);
+    border-top: 1px solid rgba(58,123,213,0.12);
   }
   .products-header {
     text-align:left; margin-bottom:70px;
@@ -518,6 +520,7 @@
   .differentials {
     padding:100px 5%;
     background: linear-gradient(180deg, var(--navy) 0%, var(--dark) 100%);
+    border-top: 1px solid rgba(58,123,213,0.12);
     position:relative; overflow:hidden;
   }
   .differentials::before {
@@ -574,11 +577,12 @@
     line-height:1; margin-bottom:8px;
   }
   .cta-content p { font-size:16px; opacity:.85; max-width:400px; }
-  .cta-actions { display:flex; gap:12px; flex-shrink:0; }
+  .cta-actions { display:flex; gap:12px; flex-shrink:0; flex-wrap:wrap; }
   .cta-phone-alt {
-    font-size: 12px;
-    color: rgba(255,255,255,0.55);
-    margin-top: 10px;
+    width: 100%;
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 14px;
     text-align: center;
   }
   .cta-phone-alt a {
@@ -618,6 +622,9 @@
     margin-bottom: 50px;
   }
   /* ── LOCALIZAÇÃO ── */
+  #location {
+    border-top: 1px solid rgba(58,123,213,0.12);
+  }
   .location-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

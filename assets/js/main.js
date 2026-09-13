@@ -109,8 +109,9 @@
     function applyVisibility() {
       const activeCat = document.querySelector('.cat-pill.active')?.getAttribute('data-cat') || 'todos';
       const isAll = activeCat === 'todos';
-      // O recolhimento em 2 linhas + botão "Ver mais" só existe na aba "Todos"
-      const limit = (isAll && !expanded) ? getCols() * ROWS_COLLAPSED : Infinity;
+      const collapsedLimit = getCols() * ROWS_COLLAPSED;
+      // O recolhimento em 2 linhas + botão "Ver mais/menos" só existe na aba "Todos"
+      const limit = (isAll && !expanded) ? collapsedLimit : Infinity;
       let matchCount = 0;
       cards.forEach(card => {
         const isMatch = isAll || card.getAttribute('data-cat') === activeCat;
@@ -119,7 +120,11 @@
         card.style.display = matchCount <= limit ? '' : 'none';
       });
       if (productsEmpty) productsEmpty.style.display = matchCount === 0 ? '' : 'none';
-      if (moreBtn) moreBtn.style.display = (isAll && !expanded && matchCount > limit) ? '' : 'none';
+      if (moreBtn) {
+        const hasMore = isAll && matchCount > collapsedLimit;
+        moreBtn.style.display = hasMore ? '' : 'none';
+        moreBtn.textContent = expanded ? 'Ver menos' : 'Ver mais produtos';
+      }
     }
 
     document.querySelectorAll('.cat-pill').forEach(pill => {
@@ -132,7 +137,7 @@
     });
 
     moreBtn?.addEventListener('click', () => {
-      expanded = true;
+      expanded = !expanded;
       applyVisibility();
     });
 
