@@ -108,16 +108,18 @@
 
     function applyVisibility() {
       const activeCat = document.querySelector('.cat-pill.active')?.getAttribute('data-cat') || 'todos';
-      const limit = expanded ? Infinity : getCols() * ROWS_COLLAPSED;
+      const isAll = activeCat === 'todos';
+      // O recolhimento em 2 linhas + botão "Ver mais" só existe na aba "Todos"
+      const limit = (isAll && !expanded) ? getCols() * ROWS_COLLAPSED : Infinity;
       let matchCount = 0;
       cards.forEach(card => {
-        const isMatch = activeCat === 'todos' || card.getAttribute('data-cat') === activeCat;
+        const isMatch = isAll || card.getAttribute('data-cat') === activeCat;
         if (!isMatch) { card.style.display = 'none'; return; }
         matchCount++;
         card.style.display = matchCount <= limit ? '' : 'none';
       });
       if (productsEmpty) productsEmpty.style.display = matchCount === 0 ? '' : 'none';
-      if (moreBtn) moreBtn.style.display = (!expanded && matchCount > limit) ? '' : 'none';
+      if (moreBtn) moreBtn.style.display = (isAll && !expanded && matchCount > limit) ? '' : 'none';
     }
 
     document.querySelectorAll('.cat-pill').forEach(pill => {
