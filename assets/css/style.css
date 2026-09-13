@@ -171,24 +171,6 @@
   }
 
   .hero-content { position:relative; z-index:2; max-width:640px; }
-  .hero-tag {
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:11px; letter-spacing:4px; text-transform:uppercase;
-    color: var(--ice);
-    border: 1px solid rgba(168,212,245,0.3);
-    padding: 6px 16px; border-radius:100px;
-    margin-bottom:28px;
-    animation: fadeUp .8s ease both;
-  }
-  .hero-tag::before {
-    content:'';
-    width:6px; height:6px; border-radius:50%;
-    background: var(--ice);
-    animation: blink 2s ease-in-out infinite;
-  }
-  @keyframes blink {
-    0%,100%{opacity:1} 50%{opacity:.2}
-  }
   .hero h1 {
     font-family: 'Phatt', 'Bebas Neue', sans-serif;
     font-size: clamp(32px, 4.5vw, 64px);
@@ -238,15 +220,6 @@
   .hero-actions .btn-primary:hover {
     box-shadow: 0 12px 40px rgba(245,166,35,0.65);
   }
-  .hero-call {
-    display:inline-flex; align-items:center; gap:8px;
-    color: var(--frost); text-decoration:none;
-    font-size:14px; font-weight:500;
-    padding: 14px 4px;
-    transition: color .2s;
-  }
-  .hero-call .material-symbols-outlined { font-size:20px; color:var(--ice); }
-  .hero-call:hover { color: var(--white); }
   .btn-outline {
     border: 1px solid rgba(168,212,245,0.4);
     color: var(--frost);
@@ -340,11 +313,11 @@
 
   /* Users who ask for less motion don't get decorative pulsing, entrance slides, or the carousel snap */
   @media (prefers-reduced-motion: reduce) {
-    .hero-bg::before, .hero-bg::after, .hero-tag::before {
+    .hero-bg::before, .hero-bg::after {
       animation: none;
     }
     .hero-mark { animation: none; transform:translate(-50%,-50%); }
-    .hero-tag, .hero h1, .hero p, .hero-actions, .hero-slider {
+    .hero h1, .hero p, .hero-actions, .hero-slider {
       animation: none;
       opacity: 1;
       transform: none;
@@ -786,12 +759,6 @@
       max-width: 100%;
       width: 100%;
     }
-    .hero-tag {
-      font-size: 10px;
-      letter-spacing: 2px;
-      padding: 5px 12px;
-      margin-bottom: 20px;
-    }
     .hero h1 {
       font-size: clamp(22px, 6.5vw, 32px);
       line-height: 1;
@@ -813,11 +780,6 @@
       justify-content: center;
       padding: 15px 24px;
       font-size: 13px;
-    }
-    .hero-call {
-      width: 100%;
-      justify-content: center;
-      padding: 4px;
     }
 
     /* Slider mobile — aparece abaixo do conteúdo */
